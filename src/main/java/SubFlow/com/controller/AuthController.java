@@ -1,6 +1,7 @@
 package SubFlow.com.controller;
 
 import SubFlow.com.dto.LoginRequestDto;
+import SubFlow.com.dto.LoginResponseDto;
 import SubFlow.com.services.TokenService;
 import SubFlow.com.services.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,6 +34,6 @@ public class AuthController {
 
         var token = tokenService.gerarToken(request);
 
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new LoginResponseDto(token));
     }
 }

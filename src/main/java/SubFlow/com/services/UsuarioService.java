@@ -13,13 +13,8 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
     // salvará o usuário com senha criptografada
     public Usuario salvarUsuario(Usuario usuario) {
-        String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
-        usuario.setSenha(senhaCriptografada);
         return usuarioRepository.save(usuario);
     }
 
@@ -29,7 +24,7 @@ public class UsuarioService {
 
         // se o usuario existir, vai comparar a senha informada com a criptografada no banco
         if (usuario != null){
-            return passwordEncoder.matches(login.senha(), usuario.getSenha());
+            return login.senha().equals(usuario.getSenha());
         }
 
         // se não retorna falso

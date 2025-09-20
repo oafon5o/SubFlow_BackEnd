@@ -1,5 +1,6 @@
 package SubFlow.com.controller;
 
+import SubFlow.com.dto.UsuarioCriarDto;
 import SubFlow.com.model.Usuario;
 import SubFlow.com.repository.UsuarioRepository;
 import SubFlow.com.services.UsuarioService;
@@ -39,10 +40,10 @@ public class UsuarioController {
 
     @PostMapping
     @Operation(summary = "Criação de usuários", description = "Método responsável por criação de usuários")
-    public ResponseEntity<?> criarUsuario(@RequestBody Usuario usuario){
+    public ResponseEntity<?> criarUsuario(@RequestBody UsuarioCriarDto usuario){
 
         try{
-            var usuarioResponse = usuarioRepository.save(usuario);
+            var usuarioResponse = usuarioRepository.save(new Usuario(null,usuario.nome(), usuario.role(), usuario.email(), usuario.senha()));
 
             return ResponseEntity.ok(usuarioResponse);
 
