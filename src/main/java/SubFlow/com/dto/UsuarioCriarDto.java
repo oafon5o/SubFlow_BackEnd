@@ -1,4 +1,10 @@
 package SubFlow.com.dto;
 
-public record UsuarioCriarDto (String email, String senha, String role, String nome) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record UsuarioCriarDto (
+        @JsonProperty("email") String email,
+        @JsonProperty("senha") String senha,
+        @JsonProperty("role") String role,
+        @JsonProperty("nome") String nome) {
 }

@@ -8,4 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface AssinaturaRepository extends JpaRepository <Assinatura, Long> {
+
+    Optional<Assinatura> findById(Long id);
 }
