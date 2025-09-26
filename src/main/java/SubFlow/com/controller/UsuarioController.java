@@ -23,7 +23,7 @@ public class UsuarioController {
     // busca de usuário por id
     @GetMapping("/{id}")
     @Operation(summary = "Visualização de usuários por id", description = "Método responsável por busca de usuários por id")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Usuario> consultarUsuarioPorId(@PathVariable Long id){
         var usuario = usuarioRepository.findById(id).orElse(null);
 
@@ -37,7 +37,7 @@ public class UsuarioController {
     //Listagem de usuários no geral
     @GetMapping
     @Operation(summary = "Listagem de usuários no geral", description = "Método responsável por listagem de usuários em geral")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<?> consultarTodosUsuarios(){
         return ResponseEntity.ok(usuarioRepository.findAll());
     }
@@ -46,11 +46,11 @@ public class UsuarioController {
     //Criação de usuários
     @PostMapping
     @Operation(summary = "Criação de usuários", description = "Método responsável por criação de usuários")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ASSINANTE')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ASSINANTE')")
     public ResponseEntity<?> criarUsuario(@RequestBody UsuarioCriarDto usuario){
 
         try{
-            var usuarioResponse = usuarioRepository.save(new Usuario(null,usuario.nome(), usuario.role(), usuario.email(), usuario.senha()));
+            var usuarioResponse = usuarioRepository.save(new Usuario(null,usuario.nome(), usuario.email(), usuario.senha(), usuario.role()));
 
             return ResponseEntity.ok(usuarioResponse);
 

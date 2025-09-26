@@ -31,7 +31,7 @@ public class AssinaturaController {
     //Criação de assinatura
     @PostMapping
     @Operation(summary = "Registro de assinatura", description = "Método responsável por registro de assinatura")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ASSINANTE')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ASSINANTE')")
     public ResponseEntity<Assinatura> registrarAssinatura(@RequestBody AssinaturaCriarDto assinaturaDto){
         try{
             var assinaturaResponse = assinaturaService.registroAssinatura(assinaturaDto);
@@ -44,7 +44,7 @@ public class AssinaturaController {
     //Visualização de status da assinatura (assinante)
     @GetMapping("/minhaAssinatura")
     @Operation(summary = "Visualização de status da assinatura", description = "Método responsável por visualização do status da assinatura do usuário logado")
-    @PreAuthorize("hasAnyRole('ROLE_ASSINANTE', 'ROLE_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_ASSINANTE', 'ROLE_ADMIN')")
     public ResponseEntity<Assinatura> visualizarAssinatura(Authentication authentication){
         String emailUsuario = authentication.getName();
         Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(emailUsuario);
@@ -66,7 +66,7 @@ public class AssinaturaController {
     //Visualização de status da assinatura por id (admin)
     @GetMapping("/{id}")
     @Operation(summary = "Visualização de status da assinatura por id", description = "Método responsável por visualização do status da assinatura de usuários por id")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Assinatura> visualizarAssinaturaPorId(@PathVariable Long id){
         Optional<Assinatura> assinaturaOptional = assinaturaService.visualizarAssinaturasPorId(id);
 
@@ -80,7 +80,7 @@ public class AssinaturaController {
     //Listagem de status da assinatura de usuários no geral (admin)
     @GetMapping
     @Operation(summary = "Listagem de status da assinatura de usuários no geral", description = "Método responsável por visualização do status da assinatura de usuários de maneira geral")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<List<Assinatura>> visualizarAssinaturasGeral(){
         List<Assinatura> assinaturas = assinaturaService.visualizarAssinaturasGeral();
         return ResponseEntity.ok(assinaturas);
